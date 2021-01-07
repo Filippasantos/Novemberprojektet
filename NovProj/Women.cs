@@ -7,6 +7,7 @@ namespace NovProj
     {
         public int totalClients;
         public int age;
+        public int skill;
         public string skinColor;
         public bool std;
         public int originalPrice;
@@ -17,7 +18,7 @@ namespace NovProj
 
         public Women()
         {   
-            int hiLo = generator.Next(0, 101);
+            int hiLo = generator.Next(0, 100);
             if (hiLo < 10)
             {
                 totalClients = generator.Next(0,14);
@@ -32,8 +33,11 @@ namespace NovProj
             }
 
             age = generator.Next(17, 60);
-            colors.Add("Black" + "White" + "Hispanic" + "Asian");
-            int whichSkin = generator.Next(0,3);
+            colors.Add("Black");
+            colors.Add("White");
+            colors.Add("Hispanic");
+            colors.Add("Asian");
+            int whichSkin = generator.Next(3);
             skinColor = colors[whichSkin];
 
             int trueOrFalse = generator.Next(2);
@@ -45,6 +49,8 @@ namespace NovProj
             {
                 std = true;
             }
+
+            skill = generator.Next(20, 50);
         }
 
         public void clientPlus()
@@ -55,7 +61,7 @@ namespace NovProj
         public void getPrice()
         {
             originalPrice = 100;
-            int hiLo = generator.Next(0, 101);
+            int hiLo = generator.Next(0, 100);
 
             if (hiLo > 5 && hiLo < 50)
             {
@@ -80,7 +86,15 @@ namespace NovProj
 
         public void setOwnPrice()
         {
-
+            int trueOrFalse = generator.Next(2);
+            if (trueOrFalse == 0)
+            {
+                ownPrice = originalPrice + generator.Next(50);
+            }
+            else
+            {
+                ownPrice = originalPrice - generator.Next(30); //man vinner på att försöka slumpa
+            }
         }
 
     }
