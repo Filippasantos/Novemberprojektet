@@ -18,7 +18,7 @@ namespace NovProj
 
         public Women()
         {   
-            int hiLo = generator.Next(0, 100);
+            int hiLo = generator.Next(0, 100); //total clients
             if (hiLo < 10)
             {
                 totalClients = generator.Next(0,14);
@@ -32,15 +32,16 @@ namespace NovProj
                 totalClients = generator.Next(41, 100);
             }
 
-            age = generator.Next(17, 60);
-            colors.Add("Black");
+            age = generator.Next(17, 60); //age
+
+            colors.Add("Black"); //race
             colors.Add("White");
             colors.Add("Hispanic");
             colors.Add("Asian");
             int whichSkin = generator.Next(3);
             skinColor = colors[whichSkin];
 
-            int trueOrFalse = generator.Next(2);
+            int trueOrFalse = generator.Next(2); //std
             if (trueOrFalse == 0)
             {
                 std = false;
@@ -50,22 +51,15 @@ namespace NovProj
                 std = true;
             }
 
-            skill = generator.Next(20, 50);
-        }
+            skill = generator.Next(20, 50); //skill
+            
+            originalPrice = 100; //original price
 
-        public void clientPlus()
-        {
-            totalClients++;
-        }
-
-        public void getPrice()
-        {
-            originalPrice = 100;
-            int hiLo = generator.Next(0, 100);
+            hiLo = generator.Next(0, 100); 
 
             if (hiLo > 5 && hiLo < 50)
             {
-                originalPrice -= generator.Next(5, 13);
+                originalPrice += generator.Next(5, 16);
             }
             else if (hiLo > 50)
             {
@@ -84,16 +78,21 @@ namespace NovProj
 
         }
 
+        public void clientPlus()
+        {
+            totalClients++;
+        }
+
         public void setOwnPrice()
         {
             int trueOrFalse = generator.Next(2);
             if (trueOrFalse == 0)
             {
-                ownPrice = originalPrice + generator.Next(50);
+                ownPrice = originalPrice + generator.Next(51);
             }
             else
             {
-                ownPrice = originalPrice - generator.Next(30); //man vinner på att försöka slumpa
+                ownPrice = originalPrice - generator.Next(26); //man vinner på att försöka slumpa
             }
         }
 

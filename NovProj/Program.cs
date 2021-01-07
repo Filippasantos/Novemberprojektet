@@ -9,7 +9,11 @@ namespace NovProj
     {
         static void Main(string[] args)
         {   
-            int money = 100;
+            int coins = 100;
+            Random generator = new Random();
+            int index;
+            int howManyLeft;
+            string answer;
 
             Women Anastasia = new Women();
             Women Galina = new Women();
@@ -32,7 +36,7 @@ namespace NovProj
             Console.ReadLine();
             System.Console.WriteLine("You will start by buying your first woman, you start with 100 coins.");
             Console.ReadLine();
-            System.Console.WriteLine("You play by clicking either 'y' (yes) or 'n' (no).");
+            System.Console.WriteLine("You choose by typing either 'yes' or 'no'.");
             Console.ReadLine();
             Console.Clear();
 
@@ -43,31 +47,61 @@ namespace NovProj
                 while (game == "buy")
                 {
                     System.Console.WriteLine("Would you like to buy a woman?");
+                    answer = Console.ReadLine();
+                    answer.ToLower();
                     
-                    if (Console.ReadKey().Key == ConsoleKey.Y) //yes
+                    if (answer == "yes") //yes
                     {
-                        System.Console.WriteLine("Do you want to ");
-                    }
-                    else if(Console.ReadKey().Key == ConsoleKey.N) //no
-                    {
-                        System.Console.WriteLine("What would you like to do?");
-                        System.Console.WriteLine("* 'buy' - buy new women.");
-                        System.Console.WriteLine("* 'work' - earn money by making your women work for you.");
-                        System.Console.WriteLine("* 'sell' - sell one of your women.");
-                        System.Console.WriteLine("* 'rescue' - attempt to rescue a woman.");
-                        game = Console.ReadLine();
-                        game.ToLower();
-                        if (game != "buy" && game != "sell" && game != "rescue" && game!= "work")
+                        index = generator.Next(theWomen.Count);
+
+                        System.Console.WriteLine("A random woman was chosen for you, her name is " + /*lös detta*/ + ".");
+                        System.Console.WriteLine("This woman costs " + theWomen[index].originalPrice + ".");
+                        System.Console.WriteLine("You have " + coins + " coins.");
+
+                        if (coins < theWomen[index].originalPrice)
                         {
-                            System.Console.WriteLine("You can't do that. Try again:");
-                            game = Console.ReadLine();
-                            game.ToLower();
+                            System.Console.WriteLine("You don't have enough money.");
+                            Console.ReadLine();
+
                         }
+                        else
+                        {
+                            System.Console.WriteLine("Do you want to buy this woman?");
+                            answer = Console.ReadLine();
+                            answer.ToLower();
+
+                            if (answer == "yes")
+                            {
+                                
+                            }
+                            else if (answer == "no")
+                            {
+                                Choice(game);
+                                Console.Clear();
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Type either 'yes' or 'no'.");
+                                answer = Console.ReadLine();
+                                answer.ToLower();
+                            }
+
+                        }
+                    }
+                    else if(answer == "no") //no
+                    {
+                        Choice(game);
                         Console.Clear();
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Type either 'yes' or 'no'");
+                        answer = Console.ReadLine();
+                        answer.ToLower();
                     }
                     
                     System.Console.WriteLine("This woman costs " + ".");
-                    int howManyLeft = theWomen.Count;
+                    howManyLeft = theWomen.Count;
                     System.Console.WriteLine("There are '" + howManyLeft + "' women left that you can buy.");
                     Console.ReadLine();
                 }
@@ -86,8 +120,32 @@ namespace NovProj
             }
             
         }
+
+        static string Choice (string whatToDo)
+        {
+            System.Console.WriteLine("What would you like to do?");
+            System.Console.WriteLine("* 'buy' - buy new women.");
+            System.Console.WriteLine("* 'work' - earn money by making your women work for you.");
+            System.Console.WriteLine("* 'sell' - sell one of your women.");
+            System.Console.WriteLine("* 'rescue' - attempt to rescue a woman.");
+            System.Console.WriteLine("OBS! 'sell' and 'rescue' won't work due to a lazy programmer.");
+
+            whatToDo = Console.ReadLine();
+            whatToDo.ToLower();
+                if (whatToDo != "buy" /*&& WhatToDo != "sell" && whatToDo != "rescue"*/ && whatToDo!= "work")
+                {
+                    System.Console.WriteLine("You can't do that. Try again:");
+                    whatToDo = Console.ReadLine();
+                    whatToDo.ToLower();
+                }
+            
+            return whatToDo;
+                        
+        }
+
     }
 }
 
 //Idéas- return?, able to make your brothel more famous and classy?, get "better" girls with a classier brothel.
 //finish "sell" and "rescue".
+//you should be able to choose a woman depending on what trait you want to focus on for your brothel, ex. age or race.
