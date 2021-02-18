@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Raylib_cs;
 
 namespace NovProj
 {
     public class Women
     {
+        public string name;
         public int totalClients;
         public int age;
         public int skill;
@@ -51,7 +53,6 @@ namespace NovProj
                 std = true;
             }
 
-            skill = generator.Next(20, 50); //skill
             
             originalPrice = 100; //original price
 
@@ -59,23 +60,24 @@ namespace NovProj
 
             if (hiLo > 5 && hiLo < 50)
             {
-                originalPrice += generator.Next(5, 16);
+                originalPrice += generator.Next(5, 13);
             }
             else if (hiLo > 50)
             {
-                originalPrice -= generator.Next(20, 40);
+                originalPrice -= generator.Next(20, 30);
             }
 
             if (age > 35)
             {
-                originalPrice -= generator.Next(10, 20);
+                originalPrice -= generator.Next(10, 15);
             }
 
             if(std == true)
             {
-                originalPrice -= generator.Next(20, 40);
+                originalPrice -= generator.Next(20, 30);
             }
-
+            
+            skill = generator.Next(0, originalPrice); //skill
         }
 
         public void clientPlus()
